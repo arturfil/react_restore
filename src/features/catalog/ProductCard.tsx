@@ -12,6 +12,7 @@ import {
 } from "@mui/material";
 
 import FavoriteIcon  from '@mui/icons-material/Favorite'
+import { Link } from "react-router-dom";
 
 interface Props {
   product: Product;
@@ -49,7 +50,7 @@ export default function ProductCard({ product }: Props) {
           <FavoriteIcon />
         </IconButton>
         <Button size="small">Add to Cart</Button>
-        <Button size="small">View</Button>
+        <Button component={Link } to={`/catalog/${product.id}`} size="small">View</Button>
       </CardActions>
     </Card>
   )
