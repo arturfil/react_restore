@@ -20,7 +20,7 @@ export function AboutPage() {
         <Button variant="contained" onClick={() => agent.TestErrors.get400Error().catch(err => console.log(err))}>Test400 Error</Button>
         <Button variant="contained" onClick={() => agent.TestErrors.get401Error().catch(err => console.log(err))}>Test401 Error</Button>
         <Button variant="contained" onClick={() => agent.TestErrors.get404Error().catch(err => console.log(err))}>Test404 Error</Button>
-        {/* <Button variant="contained" onClick={() => agent.TestErrors.get500Error().catch(err => console.log(err))}>Test500 Error</Button> */}
+        <Button variant="contained" onClick={() => agent.TestErrors.get500Error().catch(err => console.log(err))}>Test500 Error</Button>
         <Button variant="contained" onClick={getValidationError}>Test Validation Error</Button>
       </ButtonGroup>
       {errors.length > 0 && (

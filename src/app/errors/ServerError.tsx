@@ -1,10 +1,10 @@
 import { Button, Container, Divider, Paper, Typography } from '@mui/material'
-import React from 'react'
-import { useLocation } from 'react-router';
+import { useHistory, useLocation } from 'react-router-dom'
 
 export default function ServerError() {
-  const { state} = useLocation();
-  
+  const history = useHistory();
+  const {state} = useLocation<any>();
+
   return (
     <Container component={Paper}>
       {state?.error ? (
@@ -16,7 +16,7 @@ export default function ServerError() {
       ) : (
         <Typography>Server Error</Typography>
       )}
-      <Button onClick={() => console.log("test")}></Button>
+      <Button onClick={() => history.push('/catalog')}></Button>
     </Container>
   )
 }

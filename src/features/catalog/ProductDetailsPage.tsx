@@ -1,4 +1,4 @@
-import { Divider, Grid, TableBody, TableCell, TableContainer, TableRow, Typography } from '@mui/material'
+import { Divider, Grid, Table, TableBody, TableCell, TableContainer, TableRow, Typography } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
 import agent from '../../app/api/agent';
@@ -30,28 +30,30 @@ export default function ProductDetailsPage() {
         <Divider sx={{mb: 2}}></Divider>
         <Typography variant='h4'>${product.price}</Typography>
         <TableContainer>
-          <TableBody>
-            <TableRow>
-              <TableCell>Name</TableCell>
-              <TableCell>{product.name}</TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell>Description</TableCell>
-              <TableCell>{product.description}</TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell>Type</TableCell>
-              <TableCell>{product.type}</TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell>Brand</TableCell>
-              <TableCell>{product.brand}</TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell>Quantity</TableCell>
-              <TableCell>{product.quantityInStock}</TableCell>
-            </TableRow>
-          </TableBody>
+          <Table>
+            <TableBody>
+              <TableRow>
+                <TableCell>Name</TableCell>
+                <TableCell>{product.name}</TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell>Description</TableCell>
+                <TableCell>{product.description}</TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell>Type</TableCell>
+                <TableCell>{product.type}</TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell>Brand</TableCell>
+                <TableCell>{product.brand}</TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell>Quantity</TableCell>
+                <TableCell>{product.quantityInStock}</TableCell>
+              </TableRow>
+            </TableBody>
+          </Table>
         </TableContainer>
       </Grid>
     </Grid>

@@ -50,7 +50,7 @@ export default function ProductCard({ product }: Props) {
           <FavoriteIcon />
         </IconButton>
         <Button size="small">Add to Cart</Button>
-        <Button component={Link } to={`/catalog/${product.id}`} size="small">View</Button>
+        <Button component={Link} to={`/catalog/${product.id}`} size="small">View</Button>
       </CardActions>
     </Card>
   )

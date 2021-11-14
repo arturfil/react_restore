@@ -37,7 +37,6 @@ function App() {
       <Header state={darkMode} changeMode={changeMode}/>
       <Container sx={{mb: 4}}>
         <Switch>
-          {/* <Route path="/" element={<HomePage/>} /> */}
           <Route exact path="/" component={Catalog} />
           <Route exact path="/catalog/:id" component={ProductDetailsPage} />
           <Route exact path="/about" component={AboutPage} />
