@@ -9,7 +9,7 @@ export default function ServerError() {
     <Container component={Paper}>
       {state?.error ? (
         <>
-          <Typography>Server Error</Typography>
+          <Typography variant="h3" color="error" gutterBottom>{state.error.title}</Typography>
           <Divider />
           <Typography>{state.error.detail || 'Internal Server error'}</Typography>
         </>

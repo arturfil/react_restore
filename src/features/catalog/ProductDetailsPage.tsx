@@ -2,6 +2,8 @@ import { Divider, Grid, Table, TableBody, TableCell, TableContainer, TableRow, T
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
 import agent from '../../app/api/agent';
+import NotFound from '../../app/errors/NotFound';
+import Loader from '../../app/layout/Loader';
 import { Product } from '../../app/models/product';
 
 export default function ProductDetailsPage() {
@@ -16,9 +18,9 @@ export default function ProductDetailsPage() {
       .finally(() => setLoading(false))
   }, [id])
 
-  if (loading) return <h3>Loading...</h3>;
+  if (loading) return <Loader message="Getting Product"/>;
 
-  if (!product) return <h3>No Products Available</h3>
+  if (!product) return <NotFound/>
 
   return (
     <Grid container spacing={6}>

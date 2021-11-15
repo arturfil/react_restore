@@ -10,6 +10,7 @@ import ContactPage from "../../features/contact/ContactPage";
 import Header from "./Header";
 import 'react-toastify/dist/ReactToastify.css';
 import ServerError from "../errors/ServerError";
+import NotFound from "../errors/NotFound";
   
 
 function App() {
@@ -37,11 +38,12 @@ function App() {
       <Header state={darkMode} changeMode={changeMode}/>
       <Container sx={{mb: 4}}>
         <Switch>
-          <Route exact path="/" component={Catalog} />
+          <Route exact path="/catalog" component={Catalog} />
           <Route exact path="/catalog/:id" component={ProductDetailsPage} />
           <Route exact path="/about" component={AboutPage} />
           <Route exact path="/contact" component={ContactPage} />
           <Route exact path="/server-error" component={ServerError} />
+          <Route component={NotFound} />
         </Switch>
       </Container>
     </ThemeProvider>
