@@ -1,6 +1,5 @@
 
 import { Button } from "@mui/material";
-import { log } from "console";
 import { useEffect, useState } from "react";
 import agent from "../../app/api/agent";
 import Loader from "../../app/layout/Loader";

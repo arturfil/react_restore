@@ -13,12 +13,26 @@ import {
 
 import FavoriteIcon  from '@mui/icons-material/Favorite'
 import { Link } from "react-router-dom";
+import { useState } from "react";
+import agent from "../../app/api/agent";
+import { LoadingButton } from "@mui/lab";
+import { useStoreContext } from "../../app/context/StoreContext";
 
 interface Props {
   product: Product;
 }
 
 export default function ProductCard({ product }: Props) {
+  const [loading, setLoading] = useState(false);
+  const {setBasket} = useStoreContext();
+
+  function handleAddItem(productId: number) {
+    setLoading(true);
+    agent.Basket.addItem(productId)
+      .then(basket => setBasket(basket))
+      .catch(err => console.log(err))
+      .finally(() => setLoading(false));
+  }
 
   return (
     <Card>
@@ -49,7 +63,7 @@ export default function ProductCard({ product }: Props) {
         <IconButton aria-label="add to favorites">
           <FavoriteIcon />
         </IconButton>
-        <Button size="small">Add to Cart</Button>
+        <LoadingButton loading={loading} onClick={() => handleAddItem(product.id)} size="small">Add to Cart</LoadingButton>
         <Button component={Link} to={`/catalog/${product.id}`} size="small">View</Button>
       </CardActions>
     </Card>
