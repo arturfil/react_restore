@@ -100,7 +100,7 @@ export default function ProductDetailsPage() {
           </Grid>
           <Grid item xs={6}>
             <LoadingButton
-              disabled={item?.quantity == quantity || !item && quantity === 0}
+              disabled={item?.quantity === quantity || (!item && quantity === 0)}
               loading={submitting}
               onClick={handleUpdateCard}
               sx={{height: '55px'}}
