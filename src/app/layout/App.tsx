@@ -12,7 +12,6 @@ import 'react-toastify/dist/ReactToastify.css';
 import ServerError from "../errors/ServerError";
 import NotFound from "../errors/NotFound";
 import BasketPage from "../../features/basket/BasketPage";
-import { useStoreContext } from "../context/StoreContext";
 import { getCookie } from "../util/util";
 import agent from "../api/agent";
 import Loader from "./Loader";
@@ -37,9 +36,9 @@ function App() {
     } else {
       setLoading(false);
     }
-  }, [setBasket])
+  }, [dispatch])
 
-
+  // functionality for dark or light theme
   const theme = createTheme({
     palette: {
       mode: `${palleteType}`,

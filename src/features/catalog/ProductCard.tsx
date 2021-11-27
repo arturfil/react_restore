@@ -7,48 +7,39 @@ import {
   CardContent,
   CardHeader,
   CardMedia,
-  IconButton,
   Typography
 } from "@mui/material";
 
-import FavoriteIcon  from '@mui/icons-material/Favorite'
+import FavoriteIcon from '@mui/icons-material/Favorite'
 import { Link } from "react-router-dom";
-import { useState } from "react";
-import agent from "../../app/api/agent";
 import { LoadingButton } from "@mui/lab";
-import { useStoreContext } from "../../app/context/StoreContext";
+import { useAppDispatch, useAppSelector } from "../../app/store/configureStore";
+import { addBasketItemAsync } from "../basket/basketSlice";
 
 interface Props {
   product: Product;
 }
 
 export default function ProductCard({ product }: Props) {
-  const [loading, setLoading] = useState(false);
-  const {setBasket} = useStoreContext();
+  const { status } = useAppSelector(state => state.basket);
+  const dispatch = useAppDispatch();
 
-  function handleAddItem(productId: number) {
-    setLoading(true);
-    agent.Basket.addItem(productId)
-      .then(basket => setBasket(basket))
-      .catch(err => console.log(err))
-      .finally(() => setLoading(false));
-  }
 
   return (
     <Card>
       <CardHeader
         avatar={
-          <Avatar sx={{bgcolor: 'secondary.main'}}>
+          <Avatar sx={{ bgcolor: 'secondary.main' }}>
             {product.name.charAt(0).toUpperCase()}
           </Avatar>
         }
         title={product.name}
         titleTypographyProps={{
-          sx: {fontWeight: 'bold', color: 'primary.main'}
+          sx: { fontWeight: 'bold', color: 'primary.main' }
         }}
       />
       <CardMedia
-        sx={{height: 140}}
+        sx={{ height: 140 }}
         image={product.pictureUrl}
       />
       <CardContent>
@@ -60,10 +51,13 @@ export default function ProductCard({ product }: Props) {
         </Typography>
       </CardContent>
       <CardActions>
-        <IconButton aria-label="add to favorites">
+        <LoadingButton 
+          loading={status.includes('pendingAddItem' + product.id)} 
+          onClick={() => dispatch(addBasketItemAsync({ productId: product.id }))} 
+          size="small"
+        >
           <FavoriteIcon />
-        </IconButton>
-        <LoadingButton loading={loading} onClick={() => handleAddItem(product.id)} size="small">Add to Cart</LoadingButton>
+        </LoadingButton>
         <Button component={Link} to={`/catalog/${product.id}`} size="small">View</Button>
       </CardActions>
     </Card>
