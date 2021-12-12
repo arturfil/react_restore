@@ -10,7 +10,7 @@ export default function ProductList({ products }: Props) {
   return (
     <Grid sx={{mb: 4}} container spacing={4}>
       {products.map((product) => (
-        <Grid key={product.id} item xs={6} sm={4} md={3} lg={3}>
+        <Grid key={product.id} item xs={12} sm={6} md={4} lg={3}>
           <ProductCard  product={product} />
         </Grid>
       ))}

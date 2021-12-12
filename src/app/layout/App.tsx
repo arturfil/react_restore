@@ -61,7 +61,7 @@ function App() {
       <Header state={darkMode} changeMode={changeMode}/>
       <Container sx={{mb: 4}}>
         <Switch>
-          <Route exact path="/catalog" component={Catalog} />
+          <Route exact path="/" component={Catalog} />
           <Route exact path="/catalog/:id" component={ProductDetailsPage} />
           <Route exact path="/about" component={AboutPage} />
           <Route exact path="/basket" component={BasketPage} />
