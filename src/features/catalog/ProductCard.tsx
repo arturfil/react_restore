@@ -26,7 +26,7 @@ export default function ProductCard({ product }: Props) {
 
 
   return (
-    <Card>
+    <Card >
       <CardHeader
         avatar={
           <Avatar sx={{ bgcolor: 'secondary.main' }}>
@@ -35,7 +35,7 @@ export default function ProductCard({ product }: Props) {
         }
         title={product.name}
         titleTypographyProps={{
-          sx: { fontWeight: 'bold', color: 'primary.main' }
+          sx: { fontWeight: 'bold', color: 'primary.main', overflow: 'hidden' }
         }}
       />
       <CardMedia
@@ -43,11 +43,14 @@ export default function ProductCard({ product }: Props) {
         image={product.pictureUrl}
       />
       <CardContent>
-        <Typography gutterBottom variant="h5" component="div">
+        <Typography sx={{textOverflow: 'ellipsis', overflow: 'hidden', whiteSpace: "nowrap"}} gutterBottom variant="h5" component="div">
           {product.name}
         </Typography>
         <Typography variant="body2" color="text.secondary">
-          {product.brand} / {product.type} - ${product.price.toFixed(2)}
+          {product.brand} / {product.type} 
+        </Typography>
+        <Typography variant="body2" color="text.secondary">
+          ${product.price.toFixed(2)}
         </Typography>
       </CardContent>
       <CardActions>
