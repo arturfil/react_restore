@@ -3,21 +3,24 @@ import { Container, createTheme, CssBaseline, ThemeProvider } from "@mui/materia
 import { useEffect, useState } from "react";
 import { Route, Switch } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
-import { AboutPage } from "../../features/about/AboutPage";
 import Catalog from "../../features/catalog/Catalog";
-import ProductDetailsPage from "../../features/catalog/ProductDetailsPage";
-import ContactPage from "../../features/contact/ContactPage";
 import Header from "./Header";
 import 'react-toastify/dist/ReactToastify.css';
 import ServerError from "../errors/ServerError";
 import NotFound from "../errors/NotFound";
-import BasketPage from "../../features/basket/BasketPage";
 import { getCookie } from "../util/util";
 import agent from "../api/agent";
 import Loader from "./Loader";
-import CheckoutPage from "../../features/features/CheckoutPage";
-import { useAppDispatch } from "../store/configureStore";
 import { setBasket } from "../../features/basket/basketSlice";
+import { useAppDispatch } from "../store/configureStore";
+
+import { AboutPage } from "../../features/about/AboutPage";
+import ContactPage from "../../features/contact/ContactPage";
+import ProductDetailsPage from "../../features/catalog/ProductDetailsPage";
+import BasketPage from "../../features/basket/BasketPage";
+import CheckoutPage from "../../features/features/CheckoutPage";
+import Login from "../../features/account/Login";
+import Register from "../../features/account/Register";
   
 
 function App() {
@@ -66,6 +69,8 @@ function App() {
           <Route exact path="/about" component={AboutPage} />
           <Route exact path="/basket" component={BasketPage} />
           <Route exact path="/checkout" component={CheckoutPage} />
+          <Route exact path="/login" component={Login} />
+          <Route exact path="/register" component={Register} />
           <Route exact path="/contact" component={ContactPage} />
           <Route exact path="/server-error" component={ServerError} />
           <Route component={NotFound} />
