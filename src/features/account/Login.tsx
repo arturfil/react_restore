@@ -7,17 +7,23 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { Paper } from '@mui/material';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import agent from '../../app/api/agent';
 import { FieldValues, useForm } from 'react-hook-form';
 import { LoadingButton } from '@mui/lab';
-
+import { useAppDispatch } from '../../app/store/configureStore';
+import { signInUser } from './accountSlice';
 
 export default function Login() {
-  const { register, handleSubmit, formState: {isSubmitting}} = useForm();
+  const history = useHistory();
+  const dispatch = useAppDispatch();
+  const { register, handleSubmit, formState: {isSubmitting, errors, isValid}} = useForm({
+    mode: 'all'
+  });
 
   async function submitForm(data: FieldValues) {
-    await agent.Account.login(data);
+    await dispatch(signInUser(data));
+    history.push("/")
   }
   
   return (
@@ -34,14 +40,18 @@ export default function Login() {
       </Typography>
       <Box component="form" onSubmit={handleSubmit(submitForm)} noValidate sx={{ mt: 1 }}>
         <TextField
-          {...register('username')}
+          {...register('username', {required: 'Username is required'})}
+          error={!!errors.username}
+          helperText={errors?.username?.message}
           margin="normal"
           fullWidth
           label="Username"
           autoFocus
-        />
+          />
         <TextField
-          {...register('password')}
+          {...register('password', {required: 'Password is required'})}
+          error={!!errors.password}
+          helperText={errors?.password?.message}
           margin="normal"
           fullWidth
           label="Password"
@@ -49,6 +59,7 @@ export default function Login() {
           autoComplete="current-password"
         />
         <LoadingButton
+          disabled={!isValid}
           loading={isSubmitting}
           type="submit"
           fullWidth
