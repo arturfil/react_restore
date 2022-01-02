@@ -3,16 +3,19 @@ import agent from "../../app/api/agent";
 import { Basket } from "../../app/models/basket";
 import { getCookie } from "../../app/util/util";
 
+// any needed interface
 interface BasketState {
   basket: Basket | null;
   status: string;
 }
 
+// Initial State
 const initialState: BasketState = {
   basket: null,
   status: 'idle'
 }
 
+// METHODS for the api calls
 export const fetchBasketAsync = createAsyncThunk<Basket>(
   'basket/fetchBasketAsync',
   async (_, thunkAPI) => {
@@ -51,12 +54,16 @@ export const removeBasketItemAsync = createAsyncThunk<void, {productId: number, 
   }
 )
 
+// actions w/ reducers (cases)
 export const basketSlice = createSlice({
   name: 'basket',
   initialState,
   reducers: {
     setBasket: (state, action) => {
       state.basket = action.payload
+    },
+    clearBasket: (state) => {
+      state.basket = null;
     }
   },
   extraReducers: (builder => {
@@ -90,4 +97,4 @@ export const basketSlice = createSlice({
   })
 })
 
-export const {setBasket} = basketSlice.actions;
+export const {setBasket, clearBasket} = basketSlice.actions;

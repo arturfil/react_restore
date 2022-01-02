@@ -4,21 +4,27 @@ import { toast } from "react-toastify";
 import { history } from "../..";
 import agent from "../../app/api/agent";
 import { User } from "../../app/models/user";
+import { setBasket } from "../basket/basketSlice";
 
+// necessary interfaces
 interface AccountState {
   user: User | null;
 }
 
+// initial state
 const initialState: AccountState = {
   user: null
 }
 
+// POST/signin api call
 export const signInUser = createAsyncThunk<User, FieldValues>(
   'account/signInUser',
   async (data, thunkAPI) => {
     try {
-      const user = await agent.Account.login(data);
-      localStorage.setItem('user', JSON.stringify(user))
+      const userDto = await agent.Account.login(data);
+      const { basket, ...user} = userDto;
+      if (basket) thunkAPI.dispatch(setBasket(basket));
+      localStorage.setItem('user', JSON.stringify(user));
       return user;
     } catch (error: any) {
       return thunkAPI.rejectWithValue({error: error.data})
@@ -26,12 +32,15 @@ export const signInUser = createAsyncThunk<User, FieldValues>(
   }
 )
 
+// GET/user api call
 export const fetchCurrentUser = createAsyncThunk<User>(
   'account/fetchCurrentUser',
   async(_, thunkAPI) => {
     thunkAPI.dispatch(setUser(JSON.parse(localStorage.getItem('user')!)))
     try {
-      const user = await agent.Account.currentUser();
+      const userDto = await agent.Account.currentUser();
+      const {basket, ...user} = userDto;
+      if (basket) thunkAPI.dispatch(setBasket(basket));
       localStorage.setItem('user', JSON.stringify(user));
       return user;
     } catch (error: any) {
@@ -45,6 +54,7 @@ export const fetchCurrentUser = createAsyncThunk<User>(
   }
 )
 
+// create slice and reducers
 export const accountSlice = createSlice({
   name: 'account',
   initialState,
@@ -69,7 +79,7 @@ export const accountSlice = createSlice({
       state.user = action.payload
     });
     builder.addMatcher(isAnyOf(signInUser.rejected), (state, action) => {
-      console.log(action.payload);
+      throw action.payload;
     })
   })
 });

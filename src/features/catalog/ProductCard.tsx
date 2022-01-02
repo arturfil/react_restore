@@ -27,7 +27,7 @@ export default function ProductCard({ product }: Props) {
 
   return (
     <Card >
-      <CardHeader
+      {/* <CardHeader
         avatar={
           <Avatar sx={{ bgcolor: 'secondary.main' }}>
             {product.name.charAt(0).toUpperCase()}
@@ -37,7 +37,7 @@ export default function ProductCard({ product }: Props) {
         titleTypographyProps={{
           sx: { fontWeight: 'bold', color: 'primary.main', overflow: 'hidden' }
         }}
-      />
+      /> */}
       <CardMedia
         sx={{ height: 140 }}
         image={product.pictureUrl}

@@ -3,7 +3,7 @@ import { Card, CardActions, CardContent, CardHeader, Grid, Skeleton } from '@mui
 export default function ProductCardSeketon() {
   return (
     <Grid item xs component={Card}>
-      <CardHeader
+      {/* <CardHeader
         avatar={
           <Skeleton animation="wave" variant="circular" width={40} height={40} />
         }
@@ -15,7 +15,7 @@ export default function ProductCardSeketon() {
             style={{marginBottom: 6}}
           />
         }
-      />
+      /> */}
       <Skeleton sx={{height: 190}} animation="wave" variant="rectangular" />
       <CardContent>
         <>
