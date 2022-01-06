@@ -1,10 +1,15 @@
 import { Paper, Table, TableBody, TableCell, TableContainer, TableRow } from "@mui/material";
 import { useAppSelector } from "../../app/store/configureStore";
 
-export default function BasketSummary() {
-  const {basket} = useAppSelector(state => state.basket)
+interface Props {
+  subtotal?: number;
+}
 
-  const subtotal = basket?.items.reduce((acc, item) => acc + (item.price * item.quantity), 0) ?? 0;
+export default function BasketSummary({subtotal}: Props) {
+  const {basket} = useAppSelector(state => state.basket)
+  if (subtotal == undefined) {
+    subtotal = basket?.items.reduce((sum, item) => sum + (item.quantity * item.price), 0) ?? 0;
+  }
   const deliveryFee = subtotal > 100 ? 0 : 10;
 
   return (

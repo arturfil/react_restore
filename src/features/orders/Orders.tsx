@@ -3,10 +3,12 @@ import { useEffect, useState } from "react";
 import agent from "../../app/api/agent";
 import Loader from "../../app/layout/Loader";
 import { Order } from "../../app/models/order";
+import OrderDetail from "./OrderDetail";
 
-export default function Order() {
+export default function Orders() {
   const [orders, setOrders] = useState<Order[] | null>(null);
   const [loading, setLoading] = useState(true);
+  const [selectedOrderNumber, setSelectedorderNumber] = useState(0);
 
   useEffect(() => {
     agent.Orders.list()
@@ -14,6 +16,13 @@ export default function Order() {
       .catch(error => console.log(error))
       .finally(() => setLoading(false))
   }, [])
+
+  if (selectedOrderNumber > 0) return (
+    <OrderDetail 
+      order={orders?.find(o => o.id === selectedOrderNumber)!}
+      setSelectedOrder={setSelectedorderNumber}
+    />
+  )
 
   if (loading) return <Loader message="Loading Orders..."/>
 
@@ -38,8 +47,8 @@ export default function Order() {
               <TableCell component="th" scope="row">
                 {order.id}
               </TableCell>
-              <TableCell align="right">{order.total}</TableCell>
-              <TableCell align="right">{order.orderDate}</TableCell>
+              <TableCell align="right">${(order.total).toFixed(2)}</TableCell>
+              <TableCell align="right">{order.orderDate.split('T')[0]}</TableCell>
               <TableCell align="right">{order.orderStatus}</TableCell>
               <TableCell align="right">
                 <Button>View</Button>
