@@ -21,6 +21,7 @@ import Login from "../../features/account/Login";
 import Register from "../../features/account/Register";
 import { fetchCurrentUser } from "../../features/account/accountSlice";
 import PrivateRoute from "./PrivateRoute";
+import Order from "../../features/orders/Order";
   
 
 function App() {
@@ -70,6 +71,7 @@ function App() {
           <Route exact path="/about" component={AboutPage} />
           <Route exact path="/basket" component={BasketPage} />
           <PrivateRoute exact path="/checkout" component={CheckoutPage} />
+          <PrivateRoute exact path="/orders" component={Order} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/register" component={Register} />
           <Route exact path="/contact" component={ContactPage} />

@@ -13,18 +13,9 @@ export default function PaymentForm() {
       <Grid container spacing={3}>
         <Grid item xs={12} md={6}>
           <AppTextInput name="nameOnCard" label="Name on card" control={control} />
-          <TextField
-            required
-            id="cardName"
-            label="Name On Card"
-            fullWidth
-            autoComplete="cc-name"
-            variant="standard"
-          />
         </Grid>
         <Grid item xs={12} md={6}>
           <TextField
-            required
             id="cardNumber"
             label="Card Number"
             fullWidth
@@ -34,7 +25,6 @@ export default function PaymentForm() {
         </Grid>
         <Grid item xs={12} md={6}>
           <TextField
-            required
             id="expDate"
             label="Expiry Date"
             fullWidth
@@ -44,7 +34,6 @@ export default function PaymentForm() {
         </Grid>
         <Grid item xs={12} md={6}>
           <TextField
-            required
             id="cvv"
             label="CVV"
             helperText="Last three digits on signature strip"

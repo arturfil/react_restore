@@ -1,11 +1,9 @@
 import { Product } from "../../app/models/product";
 import {
-  Avatar,
   Button,
   Card,
   CardActions,
   CardContent,
-  CardHeader,
   CardMedia,
   Typography
 } from "@mui/material";
@@ -27,17 +25,6 @@ export default function ProductCard({ product }: Props) {
 
   return (
     <Card >
-      {/* <CardHeader
-        avatar={
-          <Avatar sx={{ bgcolor: 'secondary.main' }}>
-            {product.name.charAt(0).toUpperCase()}
-          </Avatar>
-        }
-        title={product.name}
-        titleTypographyProps={{
-          sx: { fontWeight: 'bold', color: 'primary.main', overflow: 'hidden' }
-        }}
-      /> */}
       <CardMedia
         sx={{ height: 140 }}
         image={product.pictureUrl}
