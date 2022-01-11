@@ -2,10 +2,10 @@ import { Box, Button, Paper, Step, StepLabel, Stepper, Typography } from "@mui/m
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useEffect, useState } from "react";
 import { FieldValues, FormProvider, useForm } from "react-hook-form";
-import AddressForm from "../checkout/AddressForm";
-import PaymentForm from "../checkout/PaymentForm";
-import Review from "../checkout/Review";
-import { validationSchema } from "../checkout/checkoutValidation";
+import AddressForm from "./AddressForm";
+import PaymentForm from "./PaymentForm";
+import Review from "./Review";
+import { validationSchema } from "./checkoutValidation";
 import agent from "../../app/api/agent";
 import { useAppDispatch } from "../../app/store/configureStore";
 import { clearBasket } from "../basket/basketSlice";

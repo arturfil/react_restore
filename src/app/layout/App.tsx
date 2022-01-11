@@ -16,12 +16,12 @@ import { AboutPage } from "../../features/about/AboutPage";
 import ContactPage from "../../features/contact/ContactPage";
 import ProductDetailsPage from "../../features/catalog/ProductDetailsPage";
 import BasketPage from "../../features/basket/BasketPage";
-import CheckoutPage from "../../features/features/CheckoutPage";
 import Login from "../../features/account/Login";
 import Register from "../../features/account/Register";
 import { fetchCurrentUser } from "../../features/account/accountSlice";
 import PrivateRoute from "./PrivateRoute";
 import Orders from "../../features/orders/Orders";
+import CheckoutWrapper from "../../features/checkout/CheckoutWrapper";
   
 
 function App() {
@@ -70,7 +70,7 @@ function App() {
           <Route exact path="/catalog/:id" component={ProductDetailsPage} />
           <Route exact path="/about" component={AboutPage} />
           <Route exact path="/basket" component={BasketPage} />
-          <PrivateRoute exact path="/checkout" component={CheckoutPage} />
+          <PrivateRoute exact path="/checkout" component={CheckoutWrapper} />
           <PrivateRoute exact path="/orders" component={Orders} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/register" component={Register} />
