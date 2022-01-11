@@ -18,9 +18,6 @@ interface Props {
 export default function PaymentForm({card, onCardInputChange}: Props) {
   const { control } = useFormContext();
   
-
-  
-
   return (
     <>
       <Typography variant="h6" gutterBottom>
