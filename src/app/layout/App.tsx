@@ -12,8 +12,6 @@ import Loader from "./Loader";
 import { fetchBasketAsync } from "../../features/basket/basketSlice";
 import { useAppDispatch } from "../store/configureStore";
 
-import { AboutPage } from "../../features/about/AboutPage";
-import ContactPage from "../../features/contact/ContactPage";
 import ProductDetailsPage from "../../features/catalog/ProductDetailsPage";
 import BasketPage from "../../features/basket/BasketPage";
 import Login from "../../features/account/Login";
@@ -22,6 +20,8 @@ import { fetchCurrentUser } from "../../features/account/accountSlice";
 import PrivateRoute from "./PrivateRoute";
 import Orders from "../../features/orders/Orders";
 import CheckoutWrapper from "../../features/checkout/CheckoutWrapper";
+import Inventory from "../../features/admin/Inventory";
+
   
 
 function App() {
@@ -68,13 +68,12 @@ function App() {
         <Switch>
           <Route exact path="/" component={Catalog} />
           <Route exact path="/catalog/:id" component={ProductDetailsPage} />
-          <Route exact path="/about" component={AboutPage} />
           <Route exact path="/basket" component={BasketPage} />
           <PrivateRoute exact path="/checkout" component={CheckoutWrapper} />
           <PrivateRoute exact path="/orders" component={Orders} />
+          <Route exact path="/inventory" component={Inventory} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/register" component={Register} />
-          <Route exact path="/contact" component={ContactPage} />
           <Route exact path="/server-error" component={ServerError} />
           <Route component={NotFound} />
         </Switch>

@@ -10,9 +10,7 @@ interface Props {
 }
 
 const midLinks = [
-  { title: 'home', path: '/' },
-  { title: 'about', path: '/about' },
-  { title: 'contact', path: '/contact' },
+  { title: 'Home', path: '/' },
 ]
 
 const rightLinks = [
@@ -54,9 +52,18 @@ export default function Header({ changeMode, state }: Props) {
               key={path}
               sx={navStyles}
             >
-              {title.toUpperCase()}
+              {title}
             </ListItem>
           ))}
+          {user && 
+            <ListItem
+                component={NavLink}
+                to="/inventory"
+                sx={navStyles}
+              >
+                Inventory
+            </ListItem>
+          }
         </List>
         <Box display="flex" alignItems="center">
           <IconButton component={Link} to="/basket" size='large' sx={{ color: 'inherit' }}>
@@ -76,7 +83,7 @@ export default function Header({ changeMode, state }: Props) {
                   key={path}
                   sx={navStyles}
                 >
-                  {title.toUpperCase()}
+                  {title}
                 </ListItem>
               ))}
             </List>

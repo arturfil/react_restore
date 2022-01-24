@@ -24,9 +24,9 @@ export default function SignedInMenu() {
       <Button 
         color="inherit"
         onClick={handleClick}
-        sx={{typography: 'h6'}}
+        sx={{typography: 'h6', textTransform: 'lowercase'}}
       >
-        {user?.email}
+        {user?.email.toLowerCase()}
       </Button>
       <Menu
         anchorEl={anchorEl}
