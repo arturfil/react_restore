@@ -1,5 +1,4 @@
-import React, { useEffect } from 'react';
-import Loader from '../../app/layout/Loader';
+import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../app/store/configureStore';
 import { fetchFilters, fetchProductsAsync, productSelectors } from '../../features/catalog/catalogSlice';
 

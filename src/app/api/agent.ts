@@ -44,6 +44,9 @@ axios.interceptors.response.use(async (response) => {
       case 401:
         toast.error(data.title);
         break;
+      case 403:
+        toast.error("You don't have persmission for that action");
+        break;
       case 500:
         history.push({
           pathname: "/server-error",

@@ -71,7 +71,7 @@ function App() {
           <Route exact path="/basket" component={BasketPage} />
           <PrivateRoute exact path="/checkout" component={CheckoutWrapper} />
           <PrivateRoute exact path="/orders" component={Orders} />
-          <Route exact path="/inventory" component={Inventory} />
+          <PrivateRoute roles={['Admin']} exact path="/inventory" component={Inventory} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/register" component={Register} />
           <Route exact path="/server-error" component={ServerError} />

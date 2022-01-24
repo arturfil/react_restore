@@ -16,7 +16,7 @@ export default function ServerError() {
       ) : (
         <Typography>Server Error</Typography>
       )}
-      <Button onClick={() => history.push('/catalog')}></Button>
+      <Button onClick={() => history.push('/')}></Button>
     </Container>
   )
 }

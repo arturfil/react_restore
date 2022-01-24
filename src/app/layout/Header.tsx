@@ -55,7 +55,7 @@ export default function Header({ changeMode, state }: Props) {
               {title}
             </ListItem>
           ))}
-          {user && 
+          {user && user.roles?.includes('Admin') &&
             <ListItem
                 component={NavLink}
                 to="/inventory"
