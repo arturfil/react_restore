@@ -1,11 +1,13 @@
 import { Delete, Edit } from '@mui/icons-material';
+import { LoadingButton } from '@mui/lab';
 import { Box, Button, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from '@mui/material';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import agent from '../../app/api/agent';
 import AppPagination from '../../app/components/AppPagination';
 import useProducts from '../../app/hooks/useProducts';
 import { Product } from '../../app/models/product';
-import { setPageNumber } from '../catalog/catalogSlice';
+import { removeProduct, setPageNumber } from '../catalog/catalogSlice';
 import ProductForm from './ProductForm';
 
 
@@ -14,10 +16,21 @@ export default function Inverntory() {
   const dispatch = useDispatch();
   const [editMode, setEditMode] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState<Product | undefined>(undefined);
+  const [loading, setLoading] = useState(false);
+  const [target, setTarget] = useState(0);
 
   function handleSelectProduct(product: Product) {
     setSelectedProduct(product);
     setEditMode(true);
+  }
+
+  function handleDeleteProduct(id: number) {
+    setLoading(true);
+    setTarget(id);
+    agent.Admin.deleteProduct(id)
+      .then(() => dispatch(removeProduct(id)))
+      .catch(error => console.log(error))
+      .finally(() => setLoading(false));
   }
 
   function cancelEdit() {
@@ -68,7 +81,11 @@ export default function Inverntory() {
                 <TableCell align="right">{product.quantityInStock}</TableCell>
                 <TableCell align="right">
                   <Button onClick={() => handleSelectProduct(product)} startIcon={<Edit/>}/>
-                  <Button startIcon={<Delete/>} color="error" />
+                  <LoadingButton 
+                    loading={loading && target === product.id} 
+                    startIcon={<Delete/>} color="error" 
+                    onClick={() => handleDeleteProduct(product.id)}
+                  />
                 </TableCell>
               </TableRow>
             ))}

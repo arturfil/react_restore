@@ -31,6 +31,7 @@ function getAxiosParams(productParams: ProductParams) {
   return params;
 }
 
+// GET/products slice
 export const fetchProductsAsync = createAsyncThunk<Product[], void, {state: RootState}>(
   "catalog/fetchProductsAsync",
   async (_, thunkApi) => {
@@ -45,6 +46,7 @@ export const fetchProductsAsync = createAsyncThunk<Product[], void, {state: Root
   }
 );
 
+// GET/products/product/id
 export const fetchSingleProductAsync = createAsyncThunk<Product, number>(
   "catalog/fetchSingleProductAsync",
   async (productId, thunkApi) => {
@@ -56,6 +58,7 @@ export const fetchSingleProductAsync = createAsyncThunk<Product, number>(
   }
 );
 
+// GET/filters
 export const fetchFilters = createAsyncThunk(
   "catalog/fetchFilters",
   async (__dirname, thunkAPI) => {
@@ -67,16 +70,18 @@ export const fetchFilters = createAsyncThunk(
   }
 );
 
+// paramenters for the fetching of the products, with pagination
 function initParams() {
   return {
     pageNumber: 1,
-    pageSize: 6,
+    pageSize: 8,
     orderBy: "name",
     brands: [],
     types: []
   };
 }
 
+// switch cases -> what were before reducers
 export const catalogSlice = createSlice({
   name: "catalog",
   initialState: productsAdapter.getInitialState<CatalogState>({
@@ -105,6 +110,11 @@ export const catalogSlice = createSlice({
     },
     setProduct: (state, action) => {
       productsAdapter.upsertOne(state, action.payload);
+      state.productsLoaded = false;
+    },
+    removeProduct: (state, action) => {
+      productsAdapter.removeOne(state, action.payload);
+      state.productsLoaded = false;
     }
   },
   extraReducers: (builder) => {
@@ -151,4 +161,4 @@ export const productSelectors = productsAdapter.getSelectors(
   (state: RootState) => state.catalog
 );
 
-export const {setProductParams, resetProductParams, setMetaData, setPageNumber, setProduct} = catalogSlice.actions;
+export const {setProductParams, removeProduct, resetProductParams, setMetaData, setPageNumber, setProduct} = catalogSlice.actions;
